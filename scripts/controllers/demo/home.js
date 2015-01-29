@@ -13,5 +13,10 @@ angular.module('demo')
 
 			$scope.list.push({id: i, name: chr});
 		}
+
+		$scope.controls = {
+			width: 5,
+			interval: 10			
+		};
 	}]);
 

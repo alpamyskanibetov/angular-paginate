@@ -7,10 +7,9 @@ app.directive("paginate", ['$http', '$state', '$rootScope',
             replace: true,
             transclude: true,
             scope: {
-            /*    type: "@",
-                componentModel: "="*/
                 list: "=",
-                elements: "="
+                elements: "=",
+                config: "@"
             },
 
             controller: function($scope){
@@ -22,9 +21,12 @@ app.directive("paginate", ['$http', '$state', '$rootScope',
                 scope.pagination = [];
                 scope.controls = [];
 
-                var n = scope.list.length;
+                scope.config = JSON.parse(scope.config);
+                
+                // scope.list = JSON.parse(scope.list); // it takes to much time to copy
 
-                var control_length = 5;
+                var n = scope.list.length;
+                var control_length = scope.config.width;
 
                 scope.current = {};
                 scope.current.page = 0;
@@ -32,7 +34,7 @@ app.directive("paginate", ['$http', '$state', '$rootScope',
                 var first = 0;
                 var last = 0;
 
-                var interval = 10;
+                var interval = scope.config.interval;
                 scope.interval = interval;
 
                 scope.elements = [];
