@@ -24,6 +24,8 @@ app.directive("paginate", ['$http', '$state', '$rootScope',
 
                 var n = scope.list.length;
 
+                var control_length = 5;
+
                 scope.current = {};
                 scope.current.page = 0;
 
@@ -87,24 +89,24 @@ app.directive("paginate", ['$http', '$state', '$rootScope',
 
                 // controls' visual for selection
                 function controlify(n) {
-                  if ( scope.current.page >= 0 && scope.current.page < 7 ) {
+                  if ( scope.current.page >= 0 && scope.current.page < (control_length * 3) / 4 ) {
                     first = 0;
 
-                    if (n < 10) {
+                    if (n < control_length) {
                       last = n;
                     }
                     else {
-                      last = 10;
+                      last = control_length;
                     }
                   }
                   else {
-                    last = scope.current.page + 5;
+                    last = scope.current.page + control_length / 2;
 
                     while ( last > (n-1) ) {
                       last--;
                     }
 
-                    first = last - 10;
+                    first = last - control_length;
                     while ( first < 0 ) {
                       first++;
                     }
